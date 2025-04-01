@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hari Raya Idul Fitri</title>
+    <link rel="icon" type="image/jpeg" href="icon.jpg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="wrapper">
+    <div class="wrapper" onclick="toggleEnvelope()">
         <div class="lid one"></div>
         <div class="lid two"></div>
         <div class="envelope"></div>
-        <div class="middle-cover"></div>
         <div class="letter">
             <div class="content">
                 <p class="greeting">Selamat Hari Raya Idul Fitri <br> عيد مبارك</p>
@@ -20,5 +20,45 @@
             </div>
         </div>
     </div>
+    
+    <script>
+        let isOpen = false;
+        function toggleEnvelope() {
+            const lidOne = document.querySelector('.lid.one');
+            const lidTwo = document.querySelector('.lid.two');
+            const letter = document.querySelector('.letter');
+            const content = document.querySelector('.content');
+            
+            if (isOpen) {
+                letter.style.transition = "transform 0.5s, height 0.5s";
+                content.style.transition = "transform 0.5s";
+                
+                letter.style.transform = "translateY(0)";
+                letter.style.height = "80%";
+                content.style.transform = "translateY(0)";
+                
+                setTimeout(() => {
+                    lidOne.style.transition = "transform 0.25s linear";
+                    lidTwo.style.transition = "transform 0.25s linear";
+                    lidOne.style.transform = "rotateX(0deg)";
+                    lidTwo.style.transform = "rotateX(90deg)";
+                }, 500);
+            } else {
+                lidOne.style.transition = "transform 0.25s linear 0s";
+                lidTwo.style.transition = "transform 0.25s linear 0.25s";
+                lidOne.style.transform = "rotateX(90deg)";
+                lidTwo.style.transform = "rotateX(180deg)";
+                
+                setTimeout(() => {
+                    letter.style.transition = "transform 0.5s 0.5s, height 0.5s 0.5s";
+                    content.style.transition = "transform 0.5s 0.5s";
+                    letter.style.transform = "translateY(-80px)";
+                    letter.style.height = "120%";
+                    content.style.transform = "translateY(-40px)";
+                }, 250);
+            }
+            isOpen = !isOpen;
+        }
+    </script>
 </body>
 </html>
